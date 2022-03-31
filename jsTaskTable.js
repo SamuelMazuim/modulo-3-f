@@ -109,6 +109,7 @@ const deleteButton = (id) => {
             .delete(`https://modulo-3.herokuapp.com/task/${loggedAccount}/${id}`)
             .then(function () {
                 attTable()
+                console.log(loggedAccount)
             })
             .catch(function (error) {
                 console.log(error)
