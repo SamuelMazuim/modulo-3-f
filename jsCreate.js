@@ -31,11 +31,6 @@ function create() {
 
     userId++
 
-    const getFromLocalStorage = () =>
-        JSON.parse(localStorage.getItem("userTasks" + newUser.id)) ?? []
-
-    setInLocalStorage()
-
     newUser.tasks.push(getFromLocalStorage())
 }
 

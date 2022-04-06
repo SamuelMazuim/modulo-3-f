@@ -11,6 +11,8 @@ const modalButtonSave = document.getElementById("confirmSave")
 
 const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"))
 const confirmDelete = document.getElementById("confirmDelete")
+// const link = "https://modulo-3.herokuapp.com"
+const link = "http://localhost:5050"
 
 window.onload = () => {
     const loggedUser = getLoggedAccFromLocalStorage()
@@ -43,8 +45,9 @@ let tasks = []
 async function attTable() {
     const loggedUser = getLoggedAccFromLocalStorage()
     tasks = await axios
-        .get(`https://modulo-3.herokuapp.com/task/${loggedUser}`)
+        .get(`${link}/task/${loggedUser}`)
         .then(function (response) {
+            console.log("data", response.data)
             return response.data
         })
         .catch(function (error) {
@@ -80,6 +83,7 @@ function createRow(newTask, index) {
 }
 
 const editButton = (id) => {
+    const loggedAccount = JSON.parse(localStorage.getItem("loggedAccount"))
     editModal.show()
     const taskIndex = tasks.findIndex((task) => task.id == id)
     modalImputDescription.value = tasks[taskIndex].description
@@ -90,7 +94,7 @@ const editButton = (id) => {
             description: modalImputDescription.value,
         }
         axios
-            .put(`https://modulo-3.herokuapp.com/task/${id}`, editTask)
+            .put(`${link}/task/${loggedAccount}/${id}`, editTask)
             .then(function () {
                 attTable()
             })
@@ -106,10 +110,9 @@ const deleteButton = (id) => {
     deleteModal.show()
     confirmDelete.onclick = () => {
         axios
-            .delete(`https://modulo-3.herokuapp.com/task/${loggedAccount}/${id}`)
+            .delete(`${link}/task/${loggedAccount}/${id}`)
             .then(function () {
                 attTable()
-                console.log(loggedAccount)
             })
             .catch(function (error) {
                 console.log(error)
@@ -136,7 +139,7 @@ const getLoggedAccFromLocalStorage = () => {
 const postTask = (newTask) => {
     const loggedUser = getLoggedAccFromLocalStorage()
     axios
-        .post(`https://modulo-3.herokuapp.com/task/${loggedUser}`, newTask)
+        .post(`${link}/task/${loggedUser}`, newTask)
         .then(function (response) {
             console.log(response)
             attTable()
