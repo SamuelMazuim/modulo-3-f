@@ -11,8 +11,8 @@ const modalButtonSave = document.getElementById("confirmSave")
 
 const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"))
 const confirmDelete = document.getElementById("confirmDelete")
-// const link = "https://modulo-3.herokuapp.com"
-const link = "http://localhost:5050"
+const link = "https://modulo-3.herokuapp.com"
+// const link = "http://localhost:5050"
 
 window.onload = () => {
     const loggedUser = getLoggedAccFromLocalStorage()
@@ -148,5 +148,3 @@ const postTask = (newTask) => {
             console.log(error)
         })
 }
-
-// https://modulo-3.herokuapp.com/ //
